@@ -1,17 +1,14 @@
 package main
 
 import (
+	"algorithms/util"
 	"errors"
 	"fmt"
 	"log"
-	"math/rand"
 )
 
 func main() {
-	myTestSlice, err := buildTestSlice(10)
-	if err != nil {
-		log.Fatal(err)
-	}
+	myTestSlice := util.CreateSlice(8)
 	fmt.Printf("My slice is: %v\n", myTestSlice)
 
 	result, err := findMaxBasic(myTestSlice)
@@ -31,19 +28,6 @@ func main() {
 		log.Fatal(err)
 	}
 	fmt.Printf("[TopTwo] The max values are %v\n", topTwo)
-}
-
-// Returns a slice of random positive integers.
-func buildTestSlice(length int) ([]int, error) {
-	if length < 1 {
-		return nil, errors.New("slice length must be an integer greater than 0")
-	}
-	result := make([]int, length)
-	const randRange = 100
-	for i := range length {
-		result[i] = rand.Intn(randRange) + 1 // [1, randRange]
-	}
-	return result, nil
 }
 
 // Basic algorithm to find the highest value in a slice of integers.
